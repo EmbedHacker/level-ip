@@ -54,7 +54,7 @@ Level-IP是一款运行在Linux用户空间的TCP协议栈，它有以下特点
     ```
     sudo apt install libcab-dev
     ```
-3. 编译所有的目标文件
+3. 确保系统安装gcc、make工具后,编译所有的目标文件
 
     ```
     make all
@@ -69,16 +69,16 @@ Level-IP是一款运行在Linux用户空间的TCP协议栈，它有以下特点
     ```
     sudo iptables -I INPUT --source 10.0.0.0/24 -j ACCEPT
     ```
-6. 伪装真实网卡的ip，注意enp0s3为真实网卡，
+6. 伪装物理网卡的ip，注意enp0s3为物理网卡，
     **用户应根据ifconfig命令的查询结果修改**
     ```
     sudo iptables -t nat -I POSTROUTING --out-interface enp0s3 -j MASQUERADE
     ```
-7. 设置真实网卡数据转发给虚拟网卡，注意修改真实网卡!!
+7. 设置物理网卡数据转发给虚拟网卡，注意修改物理网卡!!
     ```
     sudo iptables -I FORWARD --in-interface enp0s3 --out-interface tap0 -j ACCEPT
     ```
-8. 设置虚拟网卡数据转发给真实网卡,注意修改真实网卡!!
+8. 设置虚拟网卡数据转发给物理网卡,注意修改物理网卡!!
     ```
     sudo iptables -I FORWARD --in-interface tap0 --out-interface enp0s3 -j ACCEPT
     ```
